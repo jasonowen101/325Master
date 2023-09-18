@@ -1,0 +1,82 @@
+
+
+import java.util.List;
+
+public class BookSorter implements Sortable {
+
+    @Override
+    public void sortByCategory(List<Book> books) {
+        int n = books.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (books.get(j).getCategory().compareTo(books.get(j + 1).getCategory()) > 0) {
+                    // Swap books[j] and books[j+1]
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j + 1));
+                    books.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void sortByAuthor(List<Book> books) {
+        int n = books.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (books.get(j).getCategory().compareTo(books.get(j + 1).getCategory()) > 0) {
+                    // Swap books[j] and books[j+1]
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j + 1));
+                    books.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void sortByTitle(List<Book> books) {
+        int n = books.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (books.get(j).getCategory().compareTo(books.get(j + 1).getCategory()) > 0) {
+                    // Swap books[j] and books[j+1]
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j + 1));
+                    books.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void sortByLength(List<Book> books) {
+        int n = books.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (books.get(j).getLength() > books.get(j + 1).getLength()) {
+                    // Swap books[j] and books[j+1]
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j + 1));
+                    books.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void sortByPopularity(List<Book> books) {
+        int n = books.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (books.get(j).getPopularity() > books.get(j + 1).getPopularity()) {
+                    // Swap books[j] and books[j+1]
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j + 1));
+                    books.set(j + 1, temp);
+                }
+            }
+        }
+    }
+}
+
