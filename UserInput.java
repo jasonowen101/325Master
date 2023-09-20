@@ -1,15 +1,11 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.concurrent.Flow;
 
+// Travis Tan, Dennon Wilson, Drew Rakers
+// 09-18-23
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
-
 import java.awt.*;
 import java.awt.event.*;
-
-import org.w3c.dom.events.MouseEvent;
 
 public class UserInput {
     Library lib = new Library();
@@ -157,7 +153,7 @@ public class UserInput {
         m.insets = new Insets(5, 5, 5, 5);
         dialog.add(submitButton, m);
 
-        // Pops up a confirmation message and resets the textfields
+        // Pops up a confirmation message and resets the text fields
         submitAddButton.addActionListener(new ActionListener() {
 
             @Override
@@ -202,22 +198,37 @@ public class UserInput {
         c.insets = new Insets(5, 5, 5, 5);
         p.add(addButton, c);
 
-        // Button for Search
-        JButton searchButton = new JButton("Search");
+        // Button for Remove
+        JButton removeButton = new JButton("Remove");
         c.weightx = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 0;
         c.insets = new Insets(5, 5, 5, 5);
-        p.add(searchButton, c);
+        p.add(removeButton, c);
 
-        // JButton sortButton = new JButton("Sort");
-        // c.weightx = 0.5;
-        // c.fill = GridBagConstraints.HORIZONTAL;
-        // c.gridx = 2;
-        // c.gridy = 0;
-        // c.insets = new Insets(5, 5, 5, 5);
-        // p.add(sortButton, c);
+        // Confirming book for removal
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (display.getSelectionModel().isSelectionEmpty()) {
+                    JOptionPane.showMessageDialog(null, "There is no book selected.");
+                } else {
+                    int selectedRow = display.getSelectedRow();
+                    String message = "Are you sure you want to remove \"" + library.get(selectedRow).getTitle()
+                            + "\" by " + library.get(selectedRow).getAuthor() + ".";
+                    int reply = JOptionPane.showConfirmDialog(null, message, "Remove Book", JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        model.removeRow(selectedRow);
+                        // Deletes the actual data in the library arraylist
+                        library.remove(selectedRow);
+                        JOptionPane.showMessageDialog(null, "Book removed");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Removal of book canceled.");
+                    }
+                }
+            }
+        });
 
         // Adding the ComboBox dropdown menu for sorting
         String[] SortText = { "Author", "Category", "Title", "Length", "Popularity" };
@@ -259,30 +270,6 @@ public class UserInput {
         };
         Sort.addActionListener(cbActionListener);
 
-        // adding textarea
-        JTextArea textArea = new JTextArea();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 3;
-        c.weightx = 0.0;
-        // c.ipady = 500;
-        c.insets = new Insets(5, 5, 5, 5);
-        p.add(textArea, c);
-
-        // String week[] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
-        // String[] address = new String[4];
-        // ArrayList<Book> Books = new ArrayList<Book>();
-        /*
-         * JList DataList = new JList(Books.toArray());
-         * JList DataList = new JList(week);
-         * c.gridwidth = 1;
-         * c.gridy = 2;
-         * c.ipady = 300;
-         * c.insets = new Insets(5, 5, 5, 5);
-         * p.add(DataList, c);
-         */
-
         // JTable to display all books in library
         // Column Names
         String[] columnNames = { "Genre", "Author", "Title", "Number of Pages", "Rating" };
@@ -301,8 +288,10 @@ public class UserInput {
 
         // adding it to JScrollPane
         sp = new JScrollPane(display);
-        c.gridwidth = 5;
-        c.gridy = 2;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
         c.ipady = 300;
         c.insets = new Insets(5, 5, 5, 5);
         p.add(sp, c);
@@ -342,12 +331,8 @@ public class UserInput {
         int pageNumber = (Integer) pageNum.getValue();
         int Popularity = (Integer) popularity.getValue();
         Book addBook = new Book(category, author, title, pageNumber, Popularity);
-        // lib.getLibrary().add(new Book(category, author, title,
-        // pageNumber,Popularity));
-
-        // change add to addBook
+        // puts the user input into the actual database
         library.add(addBook);
-        // System.out.println(lib.getLibrary());
     }
 
     // Sets the text prompt for the Sort Drop Down Menu and changes background when
