@@ -8,8 +8,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class UserInput {
-    Library lib = new Library();
-
     JTextField authorField;
     JTextField titleField;
     JTextField categoryField;
@@ -19,10 +17,8 @@ public class UserInput {
     SpinnerModel pagenumModel;
     JSpinner pageNum;
 
-    DefaultTableModel model;
-
     JTable display;
-
+    DefaultTableModel model;
     JScrollPane sp;
 
     UserInput() {
@@ -61,7 +57,7 @@ public class UserInput {
         popularityModel = new SpinnerNumberModel(1, 1, 5, 1);
         pagenumModel = new SpinnerNumberModel(1, 1, 1000, 1);
 
-        // adding input fields to the dialog
+        // adding input fields for numbers to the dialog
         popularity = new JSpinner(popularityModel);
         pageNum = new JSpinner(pagenumModel);
 
@@ -155,7 +151,6 @@ public class UserInput {
 
         // Pops up a confirmation message and resets the text fields
         submitAddButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 getBook(library);
@@ -277,8 +272,6 @@ public class UserInput {
         // Initializing the JTable
         display = new JTable(new DefaultTableModel(null, columnNames));
         model = (DefaultTableModel) display.getModel();
-
-        display.setAutoCreateRowSorter(true);
 
         for (int i = 0; i < library.size(); i++) {
             Book curBook = library.get(i);
