@@ -1,9 +1,10 @@
 //isaac-gunderson, michael toon, ally robinson (subtask 7)
+import java.util.List;
 
 public class getListFromInput {
     
     //method for getting the sort based on user input
-    public ArrayList<Book> getSortedBooks(String category) {
+    public List<Book> getSortedBooks(String category) {
 
     if (category == "Title") {       //get list sorted by title
 
