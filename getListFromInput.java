@@ -8,22 +8,27 @@ public class getListFromInput {
 
     if (category == "Title") {       //get list sorted by title
 
-        return(listSortedByTitle());
+        return(sortByTitle());
     }
 
     if (category == "Author") {      //get list sorted by author
 
-        return(listSortedByAuthor());
+        return(sortByAuthor());
     }
 
     if (category == "Length") {      //get list sorted by pagenumber
 
-        return(listSortedByLength());
+        return(sortByLength());
     }
 
     if (category == "Popularity") {      //get list sorted by rating
 
-        return(listSortedByPopularity());
+        return(sortByPopularity());
+    }
+
+    if (category == "Category") {      //get list sorted by category
+
+        return(sortByCategory());
     }
 
     }
