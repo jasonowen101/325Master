@@ -13,22 +13,22 @@ public class BookDatabaseSorting extends BookDatabase {
     // Calling the methods from Sortable which will return the sorted ArrayList
     // a.k.a. the integration of methods
     public void passCategory() {
-        sorter.sortCategory(books);
+        sorter.sortByCategory(books);
     }
 
     public void passAuthor() {
-        sorter.sortAuthor(books);
+        sorter.sortByAuthor(books);
     }
 
     public void passTitle() {
-        sorter.sortTitle(books);
+        sorter.sortByTitle(books);
     }
 
     public void passLength() {
-        sorter.sortLength(books);
+        sorter.sortByLength(books);
     }
 
     public void passPopularity() {
-        sorter.sortPopularity(books);
+        sorter.sortByPopularity(books);
     }
 }   
