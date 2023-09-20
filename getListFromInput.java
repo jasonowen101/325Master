@@ -8,27 +8,27 @@ public class getListFromInput {
 
     if (category == "Title") {       //get list sorted by title
 
-        return(sortByTitle());
+        return(passTitle());      //call bookDatabaseSorting class methods
     }
 
     if (category == "Author") {      //get list sorted by author
 
-        return(sortByAuthor());
+        return(passAuthor());     //call bookDatabaseSorting class methods
     }
 
     if (category == "Length") {      //get list sorted by pagenumber
 
-        return(sortByLength());
+        return(passLength());     //call bookDatabaseSorting class methods
     }
 
     if (category == "Popularity") {      //get list sorted by rating
 
-        return(sortByPopularity());
+        return(passPopularity());     //call bookDatabaseSorting class methods
     }
 
     if (category == "Category") {      //get list sorted by category
 
-        return(sortByCategory());
+        return(passCategory());   //call bookDatabaseSorting class methods
     }
 
     }
