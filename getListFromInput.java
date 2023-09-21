@@ -1,5 +1,5 @@
 //isaac-gunderson, michael toon, ally robinson (subtask 7)
-import java.util.List;
+import java.util.ArrayList;
 
 public class getListFromInput {
     Sortable mySorter;
@@ -11,7 +11,7 @@ public class getListFromInput {
     private BookDatabaseSorting databaseSorter = new BookDatabaseSorting(mySorter);
 
     //method for getting the sort based on user input
-    public List<Book> getSortedBooks(String category) {
+    public ArrayList<Book> getSortedBooks(String category) {
 
     if (category == "Title") {       //get list sorted by title
 
