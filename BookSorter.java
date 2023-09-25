@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookSorter implements Sortable {
-
-    // Method to sort books by category using bubble sort algorithm
+ // Method to sort books by category using bubble sort algorithm
     @Override
-    public void sortByCategory(List<Book> books) {
+    public ArrayList<Book> sortByCategory(List<Book> books) {
         int n = books.size();
         // Outer loop to iterate through all elements
         for (int i = 0; i < n - 1; i++) {
@@ -19,9 +19,9 @@ public class BookSorter implements Sortable {
                 }
             }
         }
+        return Book;
     }
-
-    // Method to sort books by author using bubble sort algorithm
+  // Method to sort books by author using bubble sort algorithm
     @Override
     public void sortByAuthor(List<Book> books) {
         int n = books.size();
@@ -35,11 +35,12 @@ public class BookSorter implements Sortable {
                 }
             }
         }
+        return Book;
     }
 
     // Method to sort books by title using bubble sort algorithm
     @Override
-    public void sortByTitle(List<Book> books) {
+    public ArrayList<Book> sortByTitle(List<Book> books) {
         int n = books.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -51,11 +52,12 @@ public class BookSorter implements Sortable {
                 }
             }
         }
+        return Book;
     }
 
     // Method to sort books by length (number of pages) using bubble sort algorithm
     @Override
-    public void sortByLength(List<Book> books) {
+    public ArrayList<Book> sortByLength(List<Book> books) {
         int n = books.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -67,11 +69,12 @@ public class BookSorter implements Sortable {
                 }
             }
         }
+        return Book;
     }
 
     // Method to sort books by popularity (rating) using bubble sort algorithm
     @Override
-    public void sortByPopularity(List<Book> books) {
+    public ArrayList<Book> sortByPopularity(List<Book> books) {
         int n = books.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -83,5 +86,6 @@ public class BookSorter implements Sortable {
                 }
             }
         }
+        return Book;
     }
 }
