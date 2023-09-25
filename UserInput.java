@@ -1,13 +1,15 @@
 
 // Travis Tan, Dennon Wilson, Drew Rakers
 // 09-18-23
-import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-public class UserInput {
+public class UserInput{
+    BookDatabaseSorting sorting = new BookDatabaseSorting();
+    BookDatabase database;
     JTextField authorField;
     JTextField titleField;
     JTextField categoryField;
@@ -21,10 +23,7 @@ public class UserInput {
     DefaultTableModel model;
     JScrollPane sp;
 
-    UserInput() {
-    }
-
-    UserInput(ArrayList<Book> library) {
+    UserInput(BookDatabase database) {
         JFrame frame = new JFrame("Book Library");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 600);
@@ -153,7 +152,7 @@ public class UserInput {
         submitAddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getBook(library);
+                getBook(database);
                 JOptionPane.showMessageDialog(null, "Submitted successfully");
                 authorField.setText(null);
                 titleField.setText(null);
@@ -162,7 +161,7 @@ public class UserInput {
                 popularity.setValue(1);
                 // Repaints the JTable to display updated data
                 model.getDataVector().removeAllElements();
-                refreshTable(library);
+                refreshTable(database);
             }
         });
 
@@ -170,7 +169,7 @@ public class UserInput {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getBook(library);
+                getBook(database);
                 JOptionPane.showMessageDialog(null, "Submitted successfully");
                 dialog.setVisible(false);
                 authorField.setText(null);
@@ -180,7 +179,7 @@ public class UserInput {
                 popularity.setValue(1);
                 // Repaints the JTable to display updated data
                 model.getDataVector().removeAllElements();
-                refreshTable(library);
+                refreshTable(database);
             }
         });
 
@@ -210,13 +209,14 @@ public class UserInput {
                     JOptionPane.showMessageDialog(null, "There is no book selected.");
                 } else {
                     int selectedRow = display.getSelectedRow();
-                    String message = "Are you sure you want to remove \"" + library.get(selectedRow).getTitle()
-                            + "\" by " + library.get(selectedRow).getAuthor() + ".";
+                    String message = "Are you sure you want to remove \""
+                            + database.retrieveBook(selectedRow).getTitle()
+                            + "\" by " + database.retrieveBook(selectedRow).getAuthor() + ".";
                     int reply = JOptionPane.showConfirmDialog(null, message, "Remove Book", JOptionPane.YES_NO_OPTION);
                     if (reply == JOptionPane.YES_OPTION) {
                         model.removeRow(selectedRow);
                         // Deletes the actual data in the library arraylist
-                        library.remove(selectedRow);
+                        database.removeBook(selectedRow);
                         JOptionPane.showMessageDialog(null, "Book removed");
                     } else {
                         JOptionPane.showMessageDialog(null, "Removal of book canceled.");
@@ -247,18 +247,33 @@ public class UserInput {
                 switch (s) {// check for a match
                     case "Author":
                         // insert code here
+                        model.getDataVector().removeAllElements();
+                        sorting.passAuthor(database.getArrayList());
+                        refreshTable(database);
                         break;
                     case "Category":
                         // insert code here
+                        model.getDataVector().removeAllElements();
+                        sorting.passCategory(database.getArrayList());
+                        refreshTable(database);
                         break;
                     case "Title":
                         // insert code here
+                        model.getDataVector().removeAllElements();
+                        sorting.passTitle(database.getArrayList());
+                        refreshTable(database);
                         break;
                     case "Length":
                         // insert code here
+                        model.getDataVector().removeAllElements();
+                        sorting.passLength(database.getArrayList());
+                        refreshTable(database);
                         break;
                     case "Popularity":
                         // insert code here
+                        model.getDataVector().removeAllElements();
+                        sorting.passPopularity(database.getArrayList());
+                        refreshTable(database);
                         break;
                 }
             }
@@ -273,10 +288,23 @@ public class UserInput {
         display = new JTable(new DefaultTableModel(null, columnNames));
         model = (DefaultTableModel) display.getModel();
 
-        for (int i = 0; i < library.size(); i++) {
-            Book curBook = library.get(i);
-            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(), curBook.getTitle(),
-                    curBook.getLength(), curBook.getPopularity() });
+        display.getTableHeader().setReorderingAllowed(false);
+
+        for (int i = 0; i < database.size(); i++) {
+            // Book curBook = database.retrieveBook(i);
+            // model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
+            // curBook.getTitle(),
+            // curBook.getLength(), curBook.getPopularity() });
+
+            String author = database.retrieveBook(i).getAuthor();
+            String title = database.retrieveBook(i).getTitle();
+            String category = database.retrieveBook(i).getCategory();
+            int length = database.retrieveBook(i).getLength();
+            int popularity = database.retrieveBook(i).getPopularity();
+
+            Object[] data = { category, author, title, length, popularity };
+            System.out.println(Arrays.toString(data));
+            model.addRow(data);
         }
 
         // adding it to JScrollPane
@@ -304,20 +332,28 @@ public class UserInput {
                 dialog.setLocationRelativeTo(frame);
             }
         });
-
+        this.database = database;
     }
 
     // Refreshes the table to display updated Data
-    void refreshTable(ArrayList<Book> library) {
-        for (int i = 0; i < library.size(); i++) {
-            Book curBook = library.get(i);
-            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(), curBook.getTitle(),
-                    curBook.getLength(), curBook.getPopularity() });
+    void refreshTable(BookDatabase database) {
+        for (int i = 0; i < database.size(); i++) {
+            // Book curBook = database.retrieveBook(i);
+            String author = database.retrieveBook(i).getAuthor();
+            String title = database.retrieveBook(i).getTitle();
+            String category = database.retrieveBook(i).getCategory();
+            int length = database.retrieveBook(i).getLength();
+            int popularity = database.retrieveBook(i).getPopularity();
+
+            Object[] data = { category, author, title, length, popularity };
+            System.out.println(data);
+            model.addRow(data);
         }
+
     }
 
     // Gets user input in submission form and inputting it in the database
-    void getBook(ArrayList<Book> library) {
+    void getBook(BookDatabase database) {
         String author = authorField.getText();
         String category = categoryField.getText();
         String title = titleField.getText();
@@ -325,7 +361,7 @@ public class UserInput {
         int Popularity = (Integer) popularity.getValue();
         Book addBook = new Book(category, author, title, pageNumber, Popularity);
         // puts the user input into the actual database
-        library.add(addBook);
+        database.addBook(addBook);
     }
 
     // Sets the text prompt for the Sort Drop Down Menu and changes background when
