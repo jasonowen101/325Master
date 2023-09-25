@@ -24,4 +24,8 @@ public class BookDatabase {
         return database.toString();
     }
 	// toString returns a string of the database
+	public ArrayList<Book> getArrayList(){
+		return database;
+	}
+	//DW 9/25 returns the array list of books
 }
