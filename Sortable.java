@@ -1,13 +1,13 @@
 // MC/KL CSC 325 FA23
 
-import java.util.List;
+import java.util.ArrayList;
 
 // Interface for sorting via different catgeories
 public interface Sortable {
     // Method signitures for sorting Category, Author, Title, Length or Popularity
-    List<Book> sortByCategory(List<Book> books);
-    List<Book> sortByAuthor(List<Book> books);
-    List<Book> sortByTitle(List<Book> books);
-    List<Book> sortByLength(List<Book> books);
-    List<Book> sortByPopularity(List<Book> books);
+    ArrayList<Book> sortByCategory(ArrayList<Book> books);
+    ArrayList<Book> sortByAuthor(ArrayList<Book> books);
+    ArrayList<Book> sortByTitle(ArrayList<Book> books);
+    ArrayList<Book> sortByLength(ArrayList<Book> books);
+    ArrayList<Book> sortByPopularity(ArrayList<Book> books);
 }
