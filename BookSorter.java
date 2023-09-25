@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class BookSorter implements Sortable {
  // Method to sort books by category using bubble sort algorithm
@@ -88,29 +87,5 @@ public class BookSorter implements Sortable {
         }
         return books;
     }
-    @Override
-    public List<Book> sortByCategory(List<Book> books) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sortByCategory'");
-    }
-    @Override
-    public List<Book> sortByAuthor(List<Book> books) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sortByAuthor'");
-    }
-    @Override
-    public List<Book> sortByTitle(List<Book> books) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sortByTitle'");
-    }
-    @Override
-    public List<Book> sortByLength(List<Book> books) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sortByLength'");
-    }
-    @Override
-    public List<Book> sortByPopularity(List<Book> books) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sortByPopularity'");
-    }
+    
 }
