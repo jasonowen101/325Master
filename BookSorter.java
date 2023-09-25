@@ -1,3 +1,6 @@
+// SAMEER THAPA AND AAYUSH AGASTI
+// CSC 325 FA23; Subtask 3
+
 import java.util.ArrayList;
 
 public class BookSorter implements Sortable {
