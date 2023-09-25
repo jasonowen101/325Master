@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 public class BookDatabaseSorting extends BookDatabase {
     // Creating an instance of Sortable interface which now has commands from BookSorter
-    private BookSorter sorter;
+    // 9.25 BookSorter is what sorts the books; Kudos to DW
+    private BookSorter sorter = new BookSorter();
     private ArrayList<Book> sortedBooks;
 
-    // Class constructor which passes the given sorter to our sorter
-    // 9.25 BookSorter is what sorts the books; Kudos to DW
-    public BookDatabaseSorting(BookSorter sorter) {
-        this.sorter = sorter;
+    // Empty constructor
+    public BookDatabaseSorting() {
     }
 
     // Calling the methods from Sortable which will return the sorted ArrayList
