@@ -9,7 +9,7 @@ public class BookDatabaseSorting extends BookDatabase {
     private ArrayList<Book> sortedBooks;
 
     // Class constructor which passes the given sorter to our sorter
-    // 9.25 BookSorter is what sorts the books; so we changed it
+    // 9.25 BookSorter is what sorts the books; Kudos to DW
     public BookDatabaseSorting(BookSorter sorter) {
         this.sorter = sorter;
     }
