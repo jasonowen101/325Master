@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-public class UserInput{
+public class UserInput {
     BookDatabaseSorting sorting = new BookDatabaseSorting();
     BookDatabase database;
     JTextField authorField;
@@ -288,23 +288,15 @@ public class UserInput{
         display = new JTable(new DefaultTableModel(null, columnNames));
         model = (DefaultTableModel) display.getModel();
 
+        // Title row is not draggable
         display.getTableHeader().setReorderingAllowed(false);
 
+        // Displays the contents of the database to the table
         for (int i = 0; i < database.size(); i++) {
-            // Book curBook = database.retrieveBook(i);
-            // model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
-            // curBook.getTitle(),
-            // curBook.getLength(), curBook.getPopularity() });
-
-            String author = database.retrieveBook(i).getAuthor();
-            String title = database.retrieveBook(i).getTitle();
-            String category = database.retrieveBook(i).getCategory();
-            int length = database.retrieveBook(i).getLength();
-            int popularity = database.retrieveBook(i).getPopularity();
-
-            Object[] data = { category, author, title, length, popularity };
-            System.out.println(Arrays.toString(data));
-            model.addRow(data);
+            Book curBook = database.retrieveBook(i);
+            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
+                    curBook.getTitle(),
+                    curBook.getLength(), curBook.getPopularity() });
         }
 
         // adding it to JScrollPane
@@ -338,18 +330,11 @@ public class UserInput{
     // Refreshes the table to display updated Data
     void refreshTable(BookDatabase database) {
         for (int i = 0; i < database.size(); i++) {
-            // Book curBook = database.retrieveBook(i);
-            String author = database.retrieveBook(i).getAuthor();
-            String title = database.retrieveBook(i).getTitle();
-            String category = database.retrieveBook(i).getCategory();
-            int length = database.retrieveBook(i).getLength();
-            int popularity = database.retrieveBook(i).getPopularity();
-
-            Object[] data = { category, author, title, length, popularity };
-            System.out.println(data);
-            model.addRow(data);
+            Book curBook = database.retrieveBook(i);
+            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
+                    curBook.getTitle(),
+                    curBook.getLength(), curBook.getPopularity() });
         }
-
     }
 
     // Gets user input in submission form and inputting it in the database
