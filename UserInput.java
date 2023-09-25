@@ -282,7 +282,7 @@ public class UserInput{
 
         // JTable to display all books in library
         // Column Names
-        String[] columnNames = { "Genre", "Author", "Title", "Number of Pages", "Rating" };
+        String[] columnNames = { "Category", "Author", "Title", "Number of Pages", "Rating" };
 
         // Initializing the JTable
         display = new JTable(new DefaultTableModel(null, columnNames));
