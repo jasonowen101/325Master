@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class BookDatabase {
 	
-	private ArrayList<Book> database = new ArrayList<Book>();
+	public ArrayList<Book> database = new ArrayList<Book>();
 	// database is an array list containing objects of the Book class
 	public void addBook(Book book) {
 		database.add(book);
