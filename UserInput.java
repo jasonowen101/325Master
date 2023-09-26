@@ -1,18 +1,18 @@
-
 // Travis Tan, Dennon Wilson, Drew Rakers
 // 09-18-23
-import java.util.Arrays;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-public class UserInput{
+public class UserInput {
     BookDatabaseSorting sorting = new BookDatabaseSorting();
     BookDatabase database;
     JTextField authorField;
     JTextField titleField;
     JTextField categoryField;
+    boolean submitted;
 
     SpinnerModel popularityModel;
     JSpinner popularity;
@@ -24,6 +24,7 @@ public class UserInput{
     JScrollPane sp;
 
     UserInput(BookDatabase database) {
+        getListFromInput sorter = new getListFromInput();
         JFrame frame = new JFrame("Book Library");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 600);
@@ -153,7 +154,6 @@ public class UserInput{
             @Override
             public void actionPerformed(ActionEvent e) {
                 getBook(database);
-                JOptionPane.showMessageDialog(null, "Submitted successfully");
                 authorField.setText(null);
                 titleField.setText(null);
                 categoryField.setText(null);
@@ -170,8 +170,9 @@ public class UserInput{
             @Override
             public void actionPerformed(ActionEvent e) {
                 getBook(database);
-                JOptionPane.showMessageDialog(null, "Submitted successfully");
-                dialog.setVisible(false);
+                if (submitted) {
+                    dialog.setVisible(false);
+                }
                 authorField.setText(null);
                 titleField.setText(null);
                 categoryField.setText(null);
@@ -246,34 +247,26 @@ public class UserInput{
 
                 switch (s) {// check for a match
                     case "Author":
-                        // insert code here
                         model.getDataVector().removeAllElements();
-                        sorting.passAuthor(database.getArrayList());
-                        refreshTable(database);
+                        refreshTable(sorter.getSortedBooks("Author", database.getArrayList()));
                         break;
                     case "Category":
-                        // insert code here
                         model.getDataVector().removeAllElements();
-                        sorting.passCategory(database.getArrayList());
-                        refreshTable(database);
+                        refreshTable(sorter.getSortedBooks("Category", database.getArrayList()));
                         break;
                     case "Title":
-                        // insert code here
                         model.getDataVector().removeAllElements();
-                        sorting.passTitle(database.getArrayList());
-                        refreshTable(database);
+                        refreshTable(sorter.getSortedBooks("Title", database.getArrayList()));
                         break;
                     case "Length":
                         // insert code here
                         model.getDataVector().removeAllElements();
-                        sorting.passLength(database.getArrayList());
-                        refreshTable(database);
+                        refreshTable(sorter.getSortedBooks("Length", database.getArrayList()));
                         break;
                     case "Popularity":
                         // insert code here
                         model.getDataVector().removeAllElements();
-                        sorting.passPopularity(database.getArrayList());
-                        refreshTable(database);
+                        refreshTable(sorter.getSortedBooks("Popularity", database.getArrayList()));
                         break;
                 }
             }
@@ -291,20 +284,10 @@ public class UserInput{
         display.getTableHeader().setReorderingAllowed(false);
 
         for (int i = 0; i < database.size(); i++) {
-            // Book curBook = database.retrieveBook(i);
-            // model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
-            // curBook.getTitle(),
-            // curBook.getLength(), curBook.getPopularity() });
-
-            String author = database.retrieveBook(i).getAuthor();
-            String title = database.retrieveBook(i).getTitle();
-            String category = database.retrieveBook(i).getCategory();
-            int length = database.retrieveBook(i).getLength();
-            int popularity = database.retrieveBook(i).getPopularity();
-
-            Object[] data = { category, author, title, length, popularity };
-            System.out.println(Arrays.toString(data));
-            model.addRow(data);
+            Book curBook = database.retrieveBook(i);
+            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
+                    curBook.getTitle(),
+                    curBook.getLength(), curBook.getPopularity() });
         }
 
         // adding it to JScrollPane
@@ -338,30 +321,42 @@ public class UserInput{
     // Refreshes the table to display updated Data
     void refreshTable(BookDatabase database) {
         for (int i = 0; i < database.size(); i++) {
-            // Book curBook = database.retrieveBook(i);
-            String author = database.retrieveBook(i).getAuthor();
-            String title = database.retrieveBook(i).getTitle();
-            String category = database.retrieveBook(i).getCategory();
-            int length = database.retrieveBook(i).getLength();
-            int popularity = database.retrieveBook(i).getPopularity();
-
-            Object[] data = { category, author, title, length, popularity };
-            System.out.println(data);
-            model.addRow(data);
+            Book curBook = database.retrieveBook(i);
+            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
+                    curBook.getTitle(),
+                    curBook.getLength(), curBook.getPopularity() });
         }
+    }
 
+    // Refreshes the table to display the Sorted Data
+    void refreshTable(ArrayList<Book> database) {
+        for (int i = 0; i < database.size(); i++) {
+            Book curBook = database.get(i);
+            model.addRow(new Object[] { curBook.getCategory(), curBook.getAuthor(),
+                    curBook.getTitle(),
+                    curBook.getLength(), curBook.getPopularity() });
+        }
     }
 
     // Gets user input in submission form and inputting it in the database
     void getBook(BookDatabase database) {
-        String author = authorField.getText();
-        String category = categoryField.getText();
-        String title = titleField.getText();
-        int pageNumber = (Integer) pageNum.getValue();
-        int Popularity = (Integer) popularity.getValue();
-        Book addBook = new Book(category, author, title, pageNumber, Popularity);
-        // puts the user input into the actual database
-        database.addBook(addBook);
+        if (authorField.getText().isEmpty() || categoryField.getText().isEmpty() || titleField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Not All Fields Were Filled Out.", "Invalid TextFields",
+                    JOptionPane.ERROR_MESSAGE);
+            submitted = false;
+        } else {
+            String author = authorField.getText().substring(0, 1).toUpperCase() + authorField.getText().substring(1);
+            String category = categoryField.getText().substring(0, 1).toUpperCase()
+                    + authorField.getText().substring(1);
+            String title = titleField.getText().substring(0, 1).toUpperCase() + authorField.getText().substring(1);
+            int pageNumber = (Integer) pageNum.getValue();
+            int Popularity = (Integer) popularity.getValue();
+            Book addBook = new Book(category, author, title, pageNumber, Popularity);
+            // puts the user input into the actual database
+            database.addBook(addBook);
+            JOptionPane.showMessageDialog(null, "Submitted successfully");
+            submitted = true;
+        }
     }
 
     // Sets the text prompt for the Sort Drop Down Menu and changes background when
