@@ -1,7 +1,6 @@
 import javax.swing.SwingUtilities;
 
 public class Library {
-  BookDatabase database = new BookDatabase();
 
   public static void main(String[] args) {
     BookDatabase database = new BookDatabase();
