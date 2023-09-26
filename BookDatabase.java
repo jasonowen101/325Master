@@ -16,7 +16,7 @@ public class BookDatabase {
 		return database.get(i);
 	}
 	// retrieveBook returns a book object at an index
-	public ArrayList<Book> getDatabase(){
+	public ArrayList<Book> getArrayList(){
 		return database;
 	}
 	//getter for the database
