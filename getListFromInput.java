@@ -2,13 +2,8 @@
 import java.util.ArrayList;
 
 public class getListFromInput {
-    Sortable mySorter;
 
-    public getListFromInput(Sortable sorter) {
-        this.mySorter = sorter;
-    }
-
-    private BookDatabaseSorting databaseSorter = new BookDatabaseSorting(mySorter);
+    private BookDatabaseSorting databaseSorter = new BookDatabaseSorting();
 
     //method for getting the sort based on user input
     public ArrayList<Book> getSortedBooks(String category, ArrayList<Book> books) {
