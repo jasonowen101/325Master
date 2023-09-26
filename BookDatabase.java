@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class BookDatabase {
 	
-	public ArrayList<Book> database = new ArrayList<Book>();
+	private ArrayList<Book> database = new ArrayList<Book>();
 	// database is an array list containing objects of the Book class
 	public void addBook(Book book) {
 		database.add(book);
@@ -16,6 +16,10 @@ public class BookDatabase {
 		return database.get(i);
 	}
 	// retrieveBook returns a book object at an index
+	public ArrayList<Book> getArrayList(){
+		return database;
+	}
+	//getter for the database
 	public int size() {
 		return database.size();
 	}
