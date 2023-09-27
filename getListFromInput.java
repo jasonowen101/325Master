@@ -2,25 +2,19 @@
 import java.util.ArrayList;
 
 public class getListFromInput {
-    Sortable mySorter;
 
-    public getListFromInput(Sortable sorter) {
-        this.mySorter = sorter;
-    }
-
-    private BookDatabaseSorting databaseSorter = new BookDatabaseSorting(mySorter);
+    private BookDatabaseSorting databaseSorter = new BookDatabaseSorting();
 
     //method for getting the sort based on user input
     public ArrayList<Book> getSortedBooks(String category, ArrayList<Book> books) {
 
     if (category == "Title") {       //get list sorted by title
-
-        return(databaseSorter.passTitle(books));      //call bookDatabaseSorting class methods
+        return(databaseSorter.passTitle(books));          //call bookDatabaseSorting class methods
     }
 
     if (category == "Author") {      //get list sorted by author
 
-        return(databaseSorter..passAuthor(books));     //call bookDatabaseSorting class methods
+        return(databaseSorter.passAuthor(books));     //call bookDatabaseSorting class methods
     }
 
     if (category == "Length") {      //get list sorted by pagenumber
@@ -37,6 +31,9 @@ public class getListFromInput {
 
         return(databaseSorter.passCategory(books));   //call bookDatabaseSorting class methods
     }
+
+    ArrayList<Book> sortedBooks = new ArrayList<Book>();
+    return(sortedBooks);
 
     }
 

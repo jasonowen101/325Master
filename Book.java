@@ -57,4 +57,9 @@ public class Book {
   public void setPopularity(int popularity) {
     this.popularity = popularity;
   }
+
+  public String toString() {
+    return "Category: " + category + " Author: " + author + " Title: " + title + " Length:  " + length + " Popularity: "
+        + popularity;
+  }
 }
