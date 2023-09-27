@@ -337,8 +337,8 @@ public class UserInput {
         } else {
             String author = authorField.getText().substring(0, 1).toUpperCase() + authorField.getText().substring(1);
             String category = categoryField.getText().substring(0, 1).toUpperCase()
-                    + authorField.getText().substring(1);
-            String title = titleField.getText().substring(0, 1).toUpperCase() + authorField.getText().substring(1);
+                    + categoryField.getText().substring(1);
+            String title = titleField.getText().substring(0, 1).toUpperCase() + titleField.getText().substring(1);
             int pageNumber = (Integer) pageNum.getValue();
             int Popularity = (Integer) popularity.getValue();
             Book addBook = new Book(category, author, title, pageNumber, Popularity);
