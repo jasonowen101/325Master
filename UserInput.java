@@ -154,11 +154,6 @@ public class UserInput {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getBook(database);
-                authorField.setText(null);
-                titleField.setText(null);
-                categoryField.setText(null);
-                pageNum.setValue(1);
-                popularity.setValue(1);
                 // Repaints the JTable to display updated data
                 model.getDataVector().removeAllElements();
                 refreshTable(database);
@@ -173,11 +168,6 @@ public class UserInput {
                 if (submitted) {
                     dialog.setVisible(false);
                 }
-                authorField.setText(null);
-                titleField.setText(null);
-                categoryField.setText(null);
-                pageNum.setValue(1);
-                popularity.setValue(1);
                 // Repaints the JTable to display updated data
                 model.getDataVector().removeAllElements();
                 refreshTable(database);
@@ -355,6 +345,11 @@ public class UserInput {
             // puts the user input into the actual database
             database.addBook(addBook);
             JOptionPane.showMessageDialog(null, "Submitted successfully");
+            authorField.setText(null);
+            titleField.setText(null);
+            categoryField.setText(null);
+            pageNum.setValue(1);
+            popularity.setValue(1);
             submitted = true;
         }
     }
