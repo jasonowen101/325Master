@@ -2,13 +2,11 @@ import java.util.Random;
 
 class Knight extends Thread {
     public void run() {
-        String[] knightStory = new String[] {"1", "2", "3", "4", "5"};
-
         System.out.println("The brave Knight sets out on a quest to slay the dragon!");
         Random rand = new Random();
         try {
             for (int i = 1; i <= 5; i++) {
-                System.out.println("Knight: Step " + knightStory[i]);
+                System.out.println("Knight: Step " + i);
                 Thread.sleep(rand.nextInt(1000) + 500);
             }
         } catch (InterruptedException e) {
